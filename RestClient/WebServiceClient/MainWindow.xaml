@@ -1,0 +1,99 @@
+﻿<Window x:Class="WebServiceClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebServiceClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Name="AddFlightButton" FontSize="18" FontWeight="Bold" Grid.Column="0" Padding="20 10" Margin="20 10 40 10" Click="AddFlightButton_Click">Dodaj lot</Button>
+            <TextBox Name="SearchReservationTextBox" Grid.Column="1" Margin="40 10 20 10" Padding="10 5" VerticalAlignment="Center" FontSize="16"></TextBox>
+            <Button Name="SearchReservationButton" FontSize="18" FontWeight="Bold" Grid.Column="2" Padding="20 10" Margin="20 10 20 10" Click="SearchReservationButton_Click">Szukaj rezerwację</Button>
+        </Grid>
+
+        <ListBox Name="FlightsListBox" Margin="10" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch"  SelectionChanged="FlightsListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Content="{Binding From_City}"/>
+                        <Label Grid.Column="0" Grid.Row="1" Content="{Binding To_City}"/>
+                        <Label Grid.Column="1" Grid.Row="0" Content="{Binding FlightDepartureDateString}"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="{Binding FlightArrivalDateString}"/>
+                        <TextBlock Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Run Text="{Binding NumberOfAvaiableSeats}"/>
+                            <Run Text="/"/>
+                            <Run Text="{Binding NumberOfSeats}"/>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Name="FlightDetailsGrid" Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Name="EditFlightButton" FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="0" Padding="20 10" Margin="20 10" Click="EditFlightButton_Click">Edytuj lot</Button>
+            <Button Name="DeleteFlightButton" FontSize="18" FontWeight="Bold" Grid.Column="1" Grid.Row="0" Padding="20 10" Margin="20 10" Click="DeleteFlightButton_Click">Usuń lot</Button>
+            
+            <Label FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Lot z:</Label>
+            <Label FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">Lot od:</Label>
+            <Label FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">Data odlotu:</Label>
+            <Label FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">Data przylotu:</Label>
+            <Label FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Cena:</Label>
+            <Label FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">Ilość miejsc:</Label>
+            <Label FontSize="18" FontWeight="Bold" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center">Wolne miejsca:</Label>
+
+            <Label Name="FlightFromLabel" FontSize="18" FontWeight="Bold" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" MinWidth="70">Brak miejscowości</Label>
+            <Label Name="FlightToLabel" FontSize="18" FontWeight="Bold" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" MinWidth="70">Brak miejscowości</Label>
+            <Label Name="FlightDepartureDateLabel" FontSize="18" FontWeight="Bold" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" MinWidth="70">00/00/0000 00:00</Label>
+            <Label Name="FlightArrivalDateLabel" FontSize="18" FontWeight="Bold" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center" MinWidth="70">00/00/0000 00:00</Label>
+            <Label Name="PriceLabel" FontSize="18" FontWeight="Bold" Grid.Column="5" Grid.Row="5" VerticalAlignment="Center" MinWidth="70">0</Label>
+            <Label Name="NumberOfSeatsLabel" FontSize="18" FontWeight="Bold" Grid.Column="6" Grid.Row="6" VerticalAlignment="Center" MinWidth="70">0</Label>
+            <Label Name="NumberOfAvaiableSeatsLabel" FontSize="18" FontWeight="Bold" Grid.Column="7" Grid.Row="7" VerticalAlignment="Center" MinWidth="70">0</Label>
+
+            <Button Name="ReservationButton" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="8" Padding="20 10" Margin="20 10" MinWidth="70" Click="ReservationButton_Click">Zarezerwuj lot</Button>
+        </Grid>
+        
+    </Grid>
+</Window>
